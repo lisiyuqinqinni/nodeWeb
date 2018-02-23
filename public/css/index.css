@@ -1,0 +1,24 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+html{
+	background: #f9f9f9;
+}
+.register,.login{
+	width: 600px;
+	background: #ffffff;
+	margin: 0 auto;
+}
+.register a, .login a{
+	padding: 0 20px;
+	color: #003366;
+	cursor: pointer;
+}
+.register p{
+	font-size: 12px;
+	color: red;
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+}
