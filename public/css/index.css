@@ -5,6 +5,9 @@
 html{
 	background: #f9f9f9;
 }
+h1{
+	text-align: center;
+}
 .register,.login{
 	width: 600px;
 	background: #ffffff;
