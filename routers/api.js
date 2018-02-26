@@ -7,7 +7,7 @@ var responseData;
 
 router.use( function(req, res, next){
 	responseData = {
-		code: '0',
+		code: 0,
 		message: ''
 	}
 	next();
@@ -82,10 +82,17 @@ router.post('/user/login', function(req, res){
 			res.json(responseData);
 			return;
 		}
-
+		req.cookies.set('userInfo',JSON.stringify({
+			_id:userInfo._id,
+			username: userInfo.username
+		}))
 		responseData.message='登录成功';
 		res.json(responseData);
 		return;
 	})
+})
+router.get('/user/logout',function(req, res){
+	req.cookies.set("userInfo",null);
+	res.json(responseData);
 })
 module.exports = router;

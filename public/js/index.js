@@ -38,12 +38,23 @@ $(function(){
 				password: $('.login input[name=password]').val()
 			},
 			success:function(res){
-				$(".register p").html(res.message);
+				console.log(!res.code)
 
 				if(!res.code){
-					$(".register").hide();
-					$(".login").show();
+					//登陆成功
+					console.log("nihao")
+					window.location.reload();	
 				}
+			}
+		})
+	});
+	$(".userInfo").find("a").click(function(){
+		$.ajax({
+			
+			url:'/api/user/logout',
+			success:function(res){
+				//退出登陆
+				window.location.reload();
 			}
 		})
 	});

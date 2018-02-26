@@ -8,6 +8,9 @@ var swig = require('swig');
 //加载数据库模块
 var mongoose = require('mongoose');
 
+//加载cookies模块
+var Cookies = require('cookies');
+
 //设置静态文件托管
 app.use('/public', express.static(__dirname + '/public'))
 
@@ -23,6 +26,21 @@ app.engine('html', swig.renderFile);
 
 //开发模式下取消模板缓存
 swig.setDefaults({cache: false});
+
+//设置cookies
+app.use( function(req, res, next){
+	req.cookies = new Cookies(req, res);
+
+	req.userInfo = {};
+
+	if(req.cookies.get("userInfo")){
+		try {
+			req.userInfo = JSON.parse(req.cookies.get("userInfo"));
+		}catch(e){}
+	}
+
+	next();
+})
 
 //设置模板文件存放的目录
 app.set('views', './views');

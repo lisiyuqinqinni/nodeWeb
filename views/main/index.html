@@ -9,6 +9,13 @@
 </head>
 <body>
 	<h1> 欢迎光临我的博客</h1>
+	{% if userInfo._id %}
+	<div class='userInfo'>
+		<p></p>
+		<p>{{userInfo.username}}欢迎登陆我的博客!!!</p>
+		<p><a href="javascrpt:;">退出</a></p>
+	</div>
+	{% else %}
 	<div class="register">
 		<div>
 			用户名：<input type="text" name="username">
@@ -34,8 +41,7 @@
 		
 		<input type="button" value="登录">
 		<a>点击注册</a>
-
 	</div>
-
+	{% endif %}
 </body>
 </html>
