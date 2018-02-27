@@ -48,7 +48,7 @@ $(function(){
 			}
 		})
 	});
-	$(".userInfo").find("a").click(function(){
+	$(".userInfo").find(".logout").click(function(){
 		$.ajax({
 			
 			url:'/api/user/logout',

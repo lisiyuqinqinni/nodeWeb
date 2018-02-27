@@ -11,6 +11,9 @@ var mongoose = require('mongoose');
 //加载cookies模块
 var Cookies = require('cookies');
 
+//加载用户数据模板
+var User = require('./models/User.js')
+
 //设置静态文件托管
 app.use('/public', express.static(__dirname + '/public'))
 
@@ -36,10 +39,17 @@ app.use( function(req, res, next){
 	if(req.cookies.get("userInfo")){
 		try {
 			req.userInfo = JSON.parse(req.cookies.get("userInfo"));
-		}catch(e){}
+			User.findById(req.userInfo._id).then( userInfo => {
+				req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+				next();
+			})
+		}catch(e){
+			next();
+		}
+	} else {
+		next()
 	}
 
-	next();
 })
 
 //设置模板文件存放的目录

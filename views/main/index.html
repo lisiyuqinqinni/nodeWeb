@@ -11,9 +11,16 @@
 	<h1> 欢迎光临我的博客</h1>
 	{% if userInfo._id %}
 	<div class='userInfo'>
+		{% if userInfo.isAdmin%}
+		<p></p>
+		<p>管理员登陆，<a href="/admin">管理我的后台</a></p>
+		<p><a href="javascrpt:;">退出</a></p>
+		{% else %}
 		<p></p>
 		<p>{{userInfo.username}}欢迎登陆我的博客!!!</p>
-		<p><a href="javascrpt:;">退出</a></p>
+		<p><a href="javascrpt:;" class="logout">退出</a></p>
+		{% endif %}
+		
 	</div>
 	{% else %}
 	<div class="register">
