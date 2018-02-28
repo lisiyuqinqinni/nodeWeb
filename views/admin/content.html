@@ -11,16 +11,27 @@
 	<table class="table table-hover table-striped">
 		<tr>
             <td>ID</td>
-            <td>分类</td>
+			<td>分类</td>
+			<td>作者</td>
 			<td>标题</td>
 			<td>内容简介</td>
+			<td>阅读量</td>
+			<td>录入时间</td>
+			<td>操作</td>
 		</tr>
 		{% for content in contents %}
 		<tr>
 			<td>{{content._id.toString()}}</td>
-			<td>{{content.entry}}</td>
+			<td>{{content.entry.name}}</td>
+			<td>{{content.user.username}}</td>
 			<td>{{content.title}}</td>
 			<td>{{content.contentSim}}</td>
+			<td>{{content.readNum}}</td>
+			<td>{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}}</td>
+			<td>
+				<a href="/admin/content/edit?id={{content._id.toString()}}">修改</a>|
+				<a href="/admin/content/del?id={{content._id.toString()}}">删除</a>
+			</td>
 		</tr>
 		{% endfor %}
 	</table>

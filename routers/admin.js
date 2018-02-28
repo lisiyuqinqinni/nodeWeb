@@ -233,7 +233,8 @@ router.get("/content",function(req, res){
 
 		var skip = (page - 1)*limit;
 
-		Content.find().limit(limit).skip(skip).then(function(contents){
+		Content.find().limit(limit).skip(skip).populate(["entry","user"]).then(function(contents){
+			console.log(contents)
 			res.render("admin/content",{
 				userInfo: req.userInfo,
 				contents: contents,
@@ -273,6 +274,7 @@ router.post("/content/add",function(req, res){
 	new Content({
 		entry:entry,
 		title:title,
+		user: req.userInfo._id.toString(),
 		contentSim: contentSim,
 		content: content
 	}).save().then( rs => {
@@ -282,6 +284,77 @@ router.post("/content/add",function(req, res){
 			url:"/admin/content"
 		})
 	})
-})
+});
+router.get("/content/edit",function(req, res){
+	var id = req.query.id||"";
+	var entries = [];
+	if(!id){
+		res.render("admin/error",{
+			userInfo: req.userInfo,
+			message: "修改条目不存在"
+		})
+		return Promise.reject();
+	} else {
+		Entry.find().then( rs => {
+			entries = rs;
+			return Content.findOne({
+				_id: id
+			})
+		}).then( content => {
+			if(!content){
+				res.render("admin/error",{
+					userInfo: req.userInfo,
+					message: "修改条目不存在"
+				})
+				return Promise.reject();
+			} else {
+				res.render("admin/content_edit",{
+					userInfo: req.userInfo,
+					entries: entries,
+					content: content
+
+				})
+			}
+		})
+	}
+});
+router.post("/content/edit",function(req, res){
+	var id = req.query.id||"";
+	var title = req.body.title||"";
+	var entry = req.body.entry||"";
+	var contentSim = req.body.contentSim||"";
+	var content = req.body.content||"";
+	if(!id&&title&&entry&&contentSim&&content){
+		res.render("admin/error",{
+			userInfo: req.userInfo,
+			message: "内容不允许为空"
+		})
+		return;
+	}
+	Content.update({_id:id},{
+		title: title,
+		entry: entry,
+		contentSim: contentSim,
+		content: content
+	}).then( rs => {
+		res.render("admin/success",{
+			userInfo: req.userInfo,
+			message: "修改成功",
+			url: "/admin/content"
+		})
+	})
+});
+router.get("/content/del",function(req, res){
+	var id = req.query.id;
+	Content.remove({
+		_id: id
+	}).then( rs => {
+		res.render("admin/success",{
+			userInfo: req.userInfo,
+			message: "删除成功",
+			url: "/admin/content"
+		})
+	})
+});
 
 module.exports = router;

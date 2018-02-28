@@ -51,7 +51,6 @@ router.post('/user/register',function(req, res, next){
 			username: username,
 			password: password
 		});
-		console.log("ceshi")
 		return user.save();
 	}).then( function(newUserInfo){
 		console.log(newUserInfo);
