@@ -8,47 +8,62 @@
 	<script src="/public/js/index.js"></script>
 </head>
 <body>
-	<h1> 欢迎光临我的博客</h1>
-	{% if userInfo._id %}
-	<div class='userInfo'>
-		{% if userInfo.isAdmin%}
-		<p></p>
-		<p>管理员登陆，<a href="/admin">管理我的后台</a></p>
-		<p><a href="javascrpt:;" class="logout">退出</a></p>
+	<h1 style="padding:30px;"> 欢迎光临我的博客</h1>
+	<div class="nav">
+		<ul>
+			<li class="active"><a href="/" class="active">首页</a></li>
+			{% for entry in entries%}
+			<li><a href="/">{{entry.name}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="content">
+		<div class="main"></div>
+		{% if userInfo._id %}
+		<div class='userInfo'>
+			<h3>欢迎</h3>
+			{% if userInfo.isAdmin%}
+			<p></p>
+			<p>管理员登陆，<a href="/admin">管理我的后台</a></p>
+			<p><a href="javascrpt:;" class="logout">退出</a></p>
+			{% else %}
+			<p></p>
+			<p>{{userInfo.username}}欢迎登陆我的博客!!!</p>
+			<p><a href="javascrpt:;" class="logout">退出</a></p>
+			{% endif %}
+			
+		</div>
 		{% else %}
-		<p></p>
-		<p>{{userInfo.username}}欢迎登陆我的博客!!!</p>
-		<p><a href="javascrpt:;" class="logout">退出</a></p>
+		<div class="register"  style="display: none">
+			<h3>注册</h3>
+			<div>
+				用户名：<input type="text" name="username">
+			</div>
+			<div>
+				密码：<input type="password" name="password">
+			</div>
+			<div>
+				确认密码：<input type="password" name="repassword">
+			</div>
+			
+			<input type="button" value="注册">
+			<a>点击登录</a>
+			<p class=""></p>
+		</div>
+		<div class="login">
+			<h3>登陆</h3>
+			<div>
+				用户名：<input type="text" name="username">
+			</div>
+			<div>
+				密码：<input type="password" name="password">
+			</div>
+			
+			<input type="button" value="登录">
+			<a>点击注册</a>
+		</div>
 		{% endif %}
-		
 	</div>
-	{% else %}
-	<div class="register">
-		<div>
-			用户名：<input type="text" name="username">
-		</div>
-		<div>
-			密码：<input type="password" name="password">
-		</div>
-		<div>
-			确认密码：<input type="password" name="repassword">
-		</div>
-		
-		<input type="button" value="注册">
-		<a>点击登录</a>
-		<p class=""></p>
-	</div>
-	<div class="login" style="display: none">
-		<div>
-			用户名：<input type="text" name="username">
-		</div>
-		<div>
-			密码：<input type="password" name="password">
-		</div>
-		
-		<input type="button" value="登录">
-		<a>点击注册</a>
-	</div>
-	{% endif %}
+	
 </body>
 </html>

@@ -1,0 +1,32 @@
+{% extends 'layout.html'%}
+
+{% block main %}
+	<ol class="breadcrumb">
+		<li><a href="/admin">管理首页</a></li>
+		<li class="active">用户列表</li>
+	</ol>
+
+	<h4>用户列表</h4>
+
+	<table class="table table-hover table-striped">
+		<tr>
+            <td>ID</td>
+            <td>分类</td>
+			<td>标题</td>
+			<td>内容简介</td>
+		</tr>
+		{% for content in contents %}
+		<tr>
+			<td>{{content._id.toString()}}</td>
+			<td>{{content.entry}}</td>
+			<td>{{content.title}}</td>
+			<td>{{content.contentSim}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<!--分页-->
+	{% include "page.html" %}
+
+
+{% endblock %}

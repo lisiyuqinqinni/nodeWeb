@@ -4,14 +4,33 @@
 }
 html{
 	background: #f9f9f9;
+	background: url("../images/img4.jpg");
+	background-size: 100% ;
+}
+body{
+	width: 1200px;
+	margin: 0 auto;
 }
 h1{
 	text-align: center;
 }
-.register,.login{
-	width: 600px;
+.register,.login,.userInfo{
+	width: 270px;
 	background: #ffffff;
 	margin: 0 auto;
+	opacity: .5;
+	padding: 20px;
+}
+.register [type="button"],.login  [type="button"]{
+	padding:5px 10px;
+	background:green;
+	color:#fff;
+	font-size: 14px;
+}
+.register div,.login div{
+	padding:10px;
+	display: flex;
+	justify-content: space-between;
 }
 .register a, .login a{
 	padding: 0 20px;
@@ -24,4 +43,37 @@ h1{
 	width: 100%;
 	text-align: center;
 	line-height: 40px;
+}
+.nav ul{
+	display: flex;
+	justify-content: flex-start;
+	height: 45px;
+	padding-left: 30px;
+}
+.nav ul li{
+	list-style-type: none;
+	font-size: 16px;
+	line-height: 45px;
+	color: #f9f9f9;
+	cursor: pointer;
+	margin: 0 10px;
+}
+.nav ul li a{
+	display: inline-block;
+	height: 45px;
+	padding: 0 10px;
+	text-decoration-line: none;
+	color: #ffffff;
+}
+.nav ul li a.active,.nav ul li a:hover{
+	border-bottom: 1px solid green;
+	color: green;
+}
+
+.content{
+	display: flex;
+	justify-content: space-between;
+}
+.content .main{
+	width: 900px;
 }

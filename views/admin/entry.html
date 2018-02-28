@@ -1,0 +1,33 @@
+{% extends 'layout.html'%}
+
+{% block main %}
+	<ol class="breadcrumb">
+		<li><a href="/admin">管理首页</a></li>
+		<li class="active">用户列表</li>
+	</ol>
+
+	<h4>用户列表</h4>
+
+	<table class="table table-hover table-striped">
+		<tr>
+			<td>ID</td>
+			<td>分类名称</td>
+			<td>操作</td>
+		</tr>
+		{% for entry in entrys %}
+		<tr>
+			<td>{{entry._id.toString()}}</td>
+			<td>{{entry.name}}</td>
+			<td>
+				<a href="/admin/entry/entryEdit?id={{entry._id.toString()}}">修改</a>|
+				<a href="/admin/entry/del?id={{entry._id.toString()}}">删除</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<!--分页-->
+	{% include "page.html" %}
+
+
+{% endblock %}
