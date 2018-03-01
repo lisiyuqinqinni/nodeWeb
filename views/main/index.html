@@ -10,7 +10,7 @@
 				作者：<span>{{content.user.username}}</span>
 				时间：<span>{{content.addTime|date("Y年m月d日 h:i:s",-8*60)}}</span>
 				阅读量：<span>{{content.readNum}}</span>
-				评论：<span>10</span>
+				评论：<span>{{content.comments.length}}</span>
 			</div>
 			<div>
 				{{content.contentSim}}

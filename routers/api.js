@@ -94,12 +94,29 @@ router.get('/user/logout',function(req, res){
 	req.cookies.set("userInfo",null);
 	res.json(responseData);
 })
-
+//评论
+router.get("/comment",function(req, res){
+	var id = req.query.id;
+	Content.findOne({
+		_id: id
+	}).then( content => {
+		responseData.content = content;
+		res.json(responseData);
+	})
+})
 router.post("/content/comment",function(req, res){
 	var id = req.body.id||"";
-	if(!id&&req.body.content.length){
+	var username = req.userInfo.username
+	console.log(id)
+	if(!username){
 		responseData.code=1;
-		responseData.message="评论不能为空";
+		responseData.message="请登录";
+		res.json(responseData);
+		return;
+	}
+	if(req.body.content){
+		responseData.code=2;
+		responseData.message="内容不能为空";
 		res.json(responseData);
 		return;
 	}
@@ -114,6 +131,7 @@ router.post("/content/comment",function(req, res){
 		content.comments.push(data);
 		content.save();
 		responseData.message="评论成功";
+		responseData.content = content;
 		res.json(responseData);
 	})
 })
