@@ -64,12 +64,12 @@ router.get('/entry',function(req, res){
 	var limit = 10;
 
 	Entry.count().then(function(count){
-
+		
 		pages = Math.ceil(count / limit);
 
-		page = Math.max(page, 1);
-
 		page = Math.min(page, pages);
+
+		page = Math.max(page, 1);
 
 		var skip = (page - 1)*limit;
 
@@ -224,17 +224,16 @@ router.get("/content",function(req, res){
 	var limit = 10;
 
 	Content.count().then(function(count){
-
+		
 		pages = Math.ceil(count / limit);
 
-		page = Math.max(page, 1);
-
 		page = Math.min(page, pages);
+
+		page = Math.max(page, 1);
 
 		var skip = (page - 1)*limit;
 
 		Content.find().limit(limit).skip(skip).populate(["entry","user"]).then(function(contents){
-			console.log(contents)
 			res.render("admin/content",{
 				userInfo: req.userInfo,
 				contents: contents,

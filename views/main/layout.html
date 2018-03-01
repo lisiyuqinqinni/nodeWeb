@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lisiyu</title>
+	<link rel="stylesheet" href="/public/css/index.css">
+	<script src="/public/js/jquery-3.3.1.min.js"></script>
+	<script src="/public/js/index.js"></script>
+</head>
+<body>
+	<h1 style="padding:30px;"> 欢迎光临我的博客</h1>
+	<div class="nav">
+		<ul>
+			{% if entry=="" %}
+				<li class="active"><a href="/" class="active">首页</a></li>
+			{% else %}
+				<li><a href="/">首页</a></li>
+			{% endif %}
+			{% for ent in entries%}
+				{% if entry==ent.id %}
+					<li class="active"><a class="active" href="/?entry={{ent.id}}">{{ent.name}}</a></li>
+				{% else %}
+					<li><a href="/?entry={{ent.id}}">{{ent.name}}</a></li>
+				{% endif %}
+			{% endfor %}
+			
+		</ul>
+	</div>
+	<div class="content">
+		<div class="main">
+			{% block content %}{% endblock %}
+		</div>
+		{% if userInfo._id %}
+		<div class='userInfo'>
+			<h3>欢迎</h3>
+			{% if userInfo.isAdmin%}
+			<p></p>
+			<p>管理员登陆，<a href="/admin">管理我的后台</a></p>
+			<p><a href="javascrpt:;" class="logout">退出</a></p>
+			{% else %}
+			<p></p>
+			<p>{{userInfo.username}}欢迎登陆我的博客!!!</p>
+			<p><a href="javascrpt:;" class="logout">退出</a></p>
+			{% endif %}
+			
+		</div>
+		{% else %}
+		<div class="register"  style="display: none">
+			<h3>注册</h3>
+			<div>
+				用户名：<input type="text" name="username">
+			</div>
+			<div>
+				密码：<input type="password" name="password">
+			</div>
+			<div>
+				确认密码：<input type="password" name="repassword">
+			</div>
+			
+			<input type="button" value="注册">
+			<a>点击登录</a>
+			<p class=""></p>
+		</div>
+		<div class="login">
+			<h3>登陆</h3>
+			<div>
+				用户名：<input type="text" name="username">
+			</div>
+			<div>
+				密码：<input type="password" name="password">
+			</div>
+			
+			<input type="button" value="登录">
+			<a>点击注册</a>
+		</div>
+		{% endif %}
+	</div>
+	
+</body>
+</html>

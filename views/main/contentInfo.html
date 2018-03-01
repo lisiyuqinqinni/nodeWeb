@@ -1,0 +1,29 @@
+{% extends "layout.html"%}
+
+{% block content %}
+	<div class="info">
+		<h3>{{content.title}}</h3>
+		<div class="user">
+			类型：<span>{{content.entry.name}}</span>
+			作者：<span>{{content.user.username}}</span>
+			时间：<span>{{content.addTime|date("Y年m月d日 h:i:s",-8*60)}}</span>
+			阅读量：<span>{{content.readNum}}</span>
+			评论：<span>10</span>
+		</div>
+		<div class="content">
+			{{content.contentSim}}
+		</div>
+	</div>
+	<div class="comment">
+		<h4>评论内容：</h4>
+		<div>
+			<textarea name="comment" id="" rows="3"></textarea>
+			<input type="hidden" value="{{content.id}}">
+			<div class="sub">
+				<input type="button" value="提交">
+			</div>
+			
+		</div>
+	</div>
+	<script src="/public/js/comment.js"></script>
+{% endblock%}

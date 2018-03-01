@@ -1,69 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>lisiyu</title>
-	<link rel="stylesheet" href="/public/css/index.css">
-	<script src="/public/js/jquery-3.3.1.min.js"></script>
-	<script src="/public/js/index.js"></script>
-</head>
-<body>
-	<h1 style="padding:30px;"> 欢迎光临我的博客</h1>
-	<div class="nav">
-		<ul>
-			<li class="active"><a href="/" class="active">首页</a></li>
-			{% for entry in entries%}
-			<li><a href="/">{{entry.name}}</a></li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div class="content">
-		<div class="main"></div>
-		{% if userInfo._id %}
-		<div class='userInfo'>
-			<h3>欢迎</h3>
-			{% if userInfo.isAdmin%}
-			<p></p>
-			<p>管理员登陆，<a href="/admin">管理我的后台</a></p>
-			<p><a href="javascrpt:;" class="logout">退出</a></p>
-			{% else %}
-			<p></p>
-			<p>{{userInfo.username}}欢迎登陆我的博客!!!</p>
-			<p><a href="javascrpt:;" class="logout">退出</a></p>
-			{% endif %}
-			
-		</div>
+{% extends "layout.html"%}
+
+{% block content %}
+<ul>
+		{% for content in contents %}
+		<li>
+			<h3>{{content.title}}</h3>
+			<div>
+				类型：<span>{{content.entry.name}}</span>
+				作者：<span>{{content.user.username}}</span>
+				时间：<span>{{content.addTime|date("Y年m月d日 h:i:s",-8*60)}}</span>
+				阅读量：<span>{{content.readNum}}</span>
+				评论：<span>10</span>
+			</div>
+			<div>
+				{{content.contentSim}}
+			</div>
+			<a class="all" href="/info?contentId={{content.id}}">查看全文</a>
+		</li>
+		{% endfor %}
+		
+	</ul>
+	<div class="page">
+		
+		{% if page<=1 %}
+		<span>没有上一页了</span>
 		{% else %}
-		<div class="register"  style="display: none">
-			<h3>注册</h3>
-			<div>
-				用户名：<input type="text" name="username">
-			</div>
-			<div>
-				密码：<input type="password" name="password">
-			</div>
-			<div>
-				确认密码：<input type="password" name="repassword">
-			</div>
-			
-			<input type="button" value="注册">
-			<a>点击登录</a>
-			<p class=""></p>
-		</div>
-		<div class="login">
-			<h3>登陆</h3>
-			<div>
-				用户名：<input type="text" name="username">
-			</div>
-			<div>
-				密码：<input type="password" name="password">
-			</div>
-			
-			<input type="button" value="登录">
-			<a>点击注册</a>
-		</div>
+		<a href="/?entry={{entry}}&page={{page-1}}">上一页</a>
 		{% endif %}
+		
+		{% if pages==0 %}
+		您选择的项目没有文章
+		{% else %}
+		{{page}}/{{pages}}
+		{% endif %}
+		
+
+		{% if page>=pages %}
+		<span>没有上一页了</span>
+		{% else %}
+		<a href="/?entry={{entry}}&page={{page+1}}">下一页</a>
+		{% endif %}
+		
 	</div>
-	
-</body>
-</html>
+{% endblock%}

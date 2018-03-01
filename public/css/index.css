@@ -5,7 +5,7 @@
 html{
 	background: #f9f9f9;
 	background: url("../images/img4.jpg");
-	background-size: 100% ;
+	background-size: 100% 100%;
 }
 body{
 	width: 1200px;
@@ -20,6 +20,8 @@ h1{
 	margin: 0 auto;
 	opacity: .5;
 	padding: 20px;
+	height: 200px;
+	font-size: 14px;
 }
 .register [type="button"],.login  [type="button"]{
 	padding:5px 10px;
@@ -43,6 +45,9 @@ h1{
 	width: 100%;
 	text-align: center;
 	line-height: 40px;
+}
+.nav{
+	margin-bottom: 20px;
 }
 .nav ul{
 	display: flex;
@@ -76,4 +81,97 @@ h1{
 }
 .content .main{
 	width: 900px;
+}
+
+.content .main ul{
+	width: 800px;
+}
+.content .main ul li{
+	background:#ffffff;
+	list-style-type: none;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+.content .main ul li div{
+	padding:10px 0;
+}
+.content .main ul li div span{
+	color: blue;
+	padding-right: 10px;
+}
+.all{
+	text-decoration: none;
+	padding:10px;
+	display: inline-block;
+	color:#fff;
+	background: #ff9900;
+	width: 80px;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.page{
+	box-sizing: border-box;
+	height: 50px;
+	width: 800px;
+	background: #ffffff;
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 50px;
+	padding: 0 10px;
+}
+.page span,.page a{
+	cursor: pointer; 
+}
+
+.info{
+	box-sizing: border-box;
+	width: 800px;
+	background:#f9f9f9;
+	min-height: 500px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+.info h3{
+	font-size: 24px;
+	text-align: center;
+	line-height: 50px;
+}
+.info .user{
+	text-align: right;
+	line-height: 24px;
+	font-size: 14px;
+	color: #999999;
+	border-bottom: 1px dashed #666666;
+	margin-bottom:20px;
+}
+.info .user span{
+	color: blue;
+	padding-right: 10px;
+}
+.comment{
+	box-sizing: border-box;
+	padding: 20px;
+	background: #ffffff;
+	width: 800px;
+	margin-bottom: 30px;
+}
+.comment h4{
+	margin-bottom: 20px;
+}
+.comment textarea{
+	box-sizing: border-box;
+	font-size: 14px;
+	padding: 20px;
+	line-height: 30px;
+	color: #666666;
+	resize: none;
+	width: 700px;
+	margin-left:30px;
+}
+.comment .sub{
+	display: flex;
+	justify-content: flex-end;
 }

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+var Content = require("../models/Content")
 
 
 var responseData;
@@ -87,11 +88,33 @@ router.post('/user/login', function(req, res){
 		}))
 		responseData.message='登录成功';
 		res.json(responseData);
-		return;
 	})
 })
 router.get('/user/logout',function(req, res){
 	req.cookies.set("userInfo",null);
 	res.json(responseData);
+})
+
+router.post("/content/comment",function(req, res){
+	var id = req.body.id||"";
+	if(!id&&req.body.content.length){
+		responseData.code=1;
+		responseData.message="评论不能为空";
+		res.json(responseData);
+		return;
+	}
+	var data = {
+		username: req.userInfo.username,
+		comTime: new Date(),
+		comment: req.body.comment
+	}
+	Content.findOne({
+		_id: id
+	}).then( content =>{
+		content.comments.push(data);
+		content.save();
+		responseData.message="评论成功";
+		res.json(responseData);
+	})
 })
 module.exports = router;
