@@ -5,6 +5,10 @@ var comments = [];
 
 
 $(".sub .but").on("click",function(){
+    if($("[name=comment]").val().length<5){
+        alert("输入的内容太短")
+        return 
+    }
     $.ajax({
         type:"POST",
         url:"/api/content/comment",
@@ -13,8 +17,14 @@ $(".sub .but").on("click",function(){
             comment:$("[name=comment]").val()
         },
         success:function(res){
-            comments = res.content.comments.reverse()
-            commentsss()
+            if(!res.code){
+                comment:$("[name=comment]").val("")
+                comments = res.content.comments.reverse()
+                commentsss()
+            }else{
+                alert(res.message);
+            }
+           
         }
     })
 })

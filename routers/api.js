@@ -91,6 +91,7 @@ router.post('/user/login', function(req, res){
 	})
 })
 router.get('/user/logout',function(req, res){
+	console.log("tuichu")
 	req.cookies.set("userInfo",null);
 	res.json(responseData);
 })
@@ -107,7 +108,6 @@ router.get("/comment",function(req, res){
 router.post("/content/comment",function(req, res){
 	var id = req.body.id||"";
 	var username = req.userInfo.username
-	console.log(id)
 	if(!username){
 		responseData.code=1;
 		responseData.message="请登录";

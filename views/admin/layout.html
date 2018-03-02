@@ -39,7 +39,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{userInfo.username}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">退出</a></li>
+            <li class="logout"><a href="javascript:;">退出</a></li>
           </ul>
         </li>
       </ul>
@@ -49,5 +49,17 @@
 <div class="container-fluid">
   {% block main %}{% endblock %}
 </div>
+<script>
+  $(".logout a").click(function(){
+    alert();
+    $.ajax({
+			url:'/api/user/logout',
+			success:function(res){
+        //退出登陆
+        window.location.href="/"
+			}
+		})
+  })
+</script>
 </body>
 </html>
